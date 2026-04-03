@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商数课程学习平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>商数学习</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#courses">课程</a></li>
+                <li><a href="#progress">学习进度</a></li>
+                <li><a href="#about">关于我们</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-login">登录</button>
+                <button class="btn-register">注册</button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>开启你的学习之旅</h1>
+            <p>专业的课程内容，个性化的学习体验，助你快速成长</p>
+            <button class="btn-primary">开始学习</button>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card">
+                <div class="card-icon">📚</div>
+                <h3>丰富课程</h3>
+                <p>100+ 精品课程</p>
+            </div>
+            <div class="floating-card">
+                <div class="card-icon">🎯</div>
+                <h3>精准学习</h3>
+                <p>个性化推荐</p>
+            </div>
+            <div class="floating-card">
+                <div class="card-icon">📈</div>
+                <h3>持续进步</h3>
+                <p>实时进度跟踪</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="courses-section">
+        <div class="container">
+            <h2 class="section-title">热门课程</h2>
+            <div class="courses-grid">
+                <div class="course-card" data-course="1">
+                    <div class="course-image">
+                        <span class="course-badge">热门</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>商业基础入门</h3>
+                        <p class="course-description">掌握商业基础知识，建立商业思维模式</p>
+                        <div class="course-meta">
+                            <span class="meta-item">⏱️ 12课时</span>
+                            <span class="meta-item">👥 2.3k学员</span>
+                        </div>
+                        <div class="course-footer">
+                            <span class="price">¥199</span>
+                            <button class="btn-enroll">立即报名</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="2">
+                    <div class="course-image">
+                        <span class="course-badge new">新课</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>数据分析实战</h3>
+                        <p class="course-description">从零开始学习数据分析，提升决策能力</p>
+                        <div class="course-meta">
+                            <span class="meta-item">⏱️ 18课时</span>
+                            <span class="meta-item">👥 1.8k学员</span>
+                        </div>
+                        <div class="course-footer">
+                            <span class="price">¥299</span>
+                            <button class="btn-enroll">立即报名</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="3">
+                    <div class="course-image">
+                        <span class="course-badge">推荐</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>营销策略精讲</h3>
+                        <p class="course-description">学习现代营销策略，打造品牌影响力</p>
+                        <div class="course-meta">
+                            <span class="meta-item">⏱️ 15课时</span>
+                            <span class="meta-item">👥 3.1k学员</span>
+                        </div>
+                        <div class="course-footer">
+                            <span class="price">¥249</span>
+                            <button class="btn-enroll">立即报名</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="4">
+                    <div class="course-image">
+                        <span class="course-badge">进阶</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>财务管理实务</h3>
+                        <p class="course-description">深入理解财务管理，优化企业运营</p>
+                        <div class="course-meta">
+                            <span class="meta-item">⏱️ 20课时</span>
+                            <span class="meta-item">👥 1.5k学员</span>
+                        </div>
+                        <div class="course-footer">
+                            <span class="price">¥399</span>
+                            <button class="btn-enroll">立即报名</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="5">
+                    <div class="course-image">
+                        <span class="course-badge">实战</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>项目管理实战</h3>
+                        <p class="course-description">掌握项目管理技能，提升团队效率</p>
+                        <div class="course-meta">
+                            <span class="meta-item">⏱️ 16课时</span>
+                            <span class="meta-item">👥 2.0k学员</span>
+                        </div>
+                        <div class="course-footer">
+                            <span class="price">¥279</span>
+                            <button class="btn-enroll">立即报名</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="6">
+                    <div class="course-image">
+                        <span class="course-badge">精品</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>领导力培养</h3>
+                        <p class="course-description">培养领导力思维，成为优秀管理者</p>
+                        <div class="course-meta">
+                            <span class="meta-item">⏱️ 14课时</span>
+                            <span class="meta-item">👥 2.7k学员</span>
+                        </div>
+                        <div class="course-footer">
+                            <span class="price">¥329</span>
+                            <button class="btn-enroll">立即报名</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="progress" class="progress-section">
+        <div class="container">
+            <h2 class="section-title">学习进度</h2>
+            <div class="progress-container">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h3>商业基础入门</h3>
+                        <span class="progress-percentage">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>已完成 9/12 课时</span>
+                        <span>剩余 3 课时</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h3>数据分析实战</h3>
+                        <span class="progress-percentage">45%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>已完成 8/18 课时</span>
+                        <span>剩余 10 课时</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h3>营销策略精讲</h3>
+                        <span class="progress-percentage">20%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 20%"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>已完成 3/15 课时</span>
+                        <span>剩余 12 课时</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">关于我们</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>商数学习平台致力于为学习者提供高质量的在线课程，帮助您提升专业技能，实现职业发展目标。</p>
+                    <p>我们的课程由行业专家精心设计，内容实用、易于理解，适合不同层次的学习者。</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">精品课程</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50k+</span>
+                            <span class="stat-label">注册学员</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">好评率</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <span>🎓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>商数学习</h3>
+                    <p>专业的在线学习平台</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#courses">课程</a></li>
+                        <li><a href="#progress">学习进度</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li>📧 contact@shangshu.com</li>
+                        <li>📞 400-888-8888</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 商数学习平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
