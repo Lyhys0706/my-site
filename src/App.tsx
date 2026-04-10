@@ -4,6 +4,7 @@ import Header from './components/Header';
 import About from './components/About';
 import Hobbies from './components/Hobbies';
 import Skills from './components/Skills';
+import PythonCourse from './components/PythonCourse';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 
@@ -15,6 +16,7 @@ function App() {
         <About />
         <Hobbies />
         <Skills />
+        <PythonCourse />
         <Portfolio />
         <Contact />
       </main>

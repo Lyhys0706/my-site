@@ -15,6 +15,7 @@ const Header: React.FC = () => {
           <a href="#about" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">关于我</a>
           <a href="#hobbies" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">兴趣爱好</a>
           <a href="#skills" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">技能</a>
+          <a href="#python-course" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">Python课程</a>
           <a href="#portfolio" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">作品集</a>
           <a href="#contact" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">联系我</a>
         </nav>
