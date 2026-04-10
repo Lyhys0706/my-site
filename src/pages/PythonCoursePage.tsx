@@ -46,24 +46,25 @@ const PythonCoursePage: React.FC = () => {
             本课程包含5个核心章节，涵盖了Python基础语法、数据结构、函数与模块、面向对象编程以及文件操作与异常处理等内容。
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="space-y-12">
           {lessons.map((lesson) => (
             <div 
               key={lesson.id} 
-              className="bg-white border border-pink-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1"
+              id={lesson.id === 1 ? "syntax" : lesson.id === 2 ? "data-structures" : lesson.id === 3 ? "functions" : lesson.id === 4 ? "oop" : "file-handling"}
+              className="bg-white border border-pink-200 rounded-xl p-8 shadow-sm"
             >
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-pink-700 font-bold mr-3">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 rounded-full bg-pink-200 flex items-center justify-center text-pink-700 font-bold mr-4">
                   {lesson.id}
                 </div>
-                <h3 className="text-xl font-semibold text-pink-700">{lesson.title}</h3>
+                <h3 className="text-2xl font-semibold text-pink-700">{lesson.title}</h3>
               </div>
-              <p className="text-gray-600 mb-4">{lesson.description}</p>
-              <div className="border-t border-pink-100 pt-4">
-                <h4 className="font-medium text-pink-600 mb-2">学习内容：</h4>
-                <ul className="list-disc list-inside text-gray-600 space-y-1">
+              <p className="text-gray-600 mb-6 text-lg">{lesson.description}</p>
+              <div className="border-t border-pink-100 pt-6">
+                <h4 className="font-medium text-pink-600 mb-4 text-lg">学习内容：</h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2">
                   {lesson.topics.map((topic, index) => (
-                    <li key={index}>{topic}</li>
+                    <li key={index} className="text-md">{topic}</li>
                   ))}
                 </ul>
               </div>
