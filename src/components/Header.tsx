@@ -12,10 +12,11 @@ const Header: React.FC = () => {
         <h1 className="text-4xl md:text-5xl font-bold text-pink-800 mb-2">商务数据分析学生</h1>
         <p className="text-lg text-pink-700 mb-6 text-center">喜欢美食、旅游和摄影的开朗女孩</p>
         <nav className="flex flex-wrap justify-center gap-4">
+          <a href="/" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">首页</a>
           <a href="#about" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">关于我</a>
           <a href="#hobbies" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">兴趣爱好</a>
           <a href="#skills" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">技能</a>
-          <a href="#python-course" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">Python课程</a>
+          <a href="/python-course" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">Python课程</a>
           <a href="#portfolio" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">作品集</a>
           <a href="#contact" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">联系我</a>
         </nav>
