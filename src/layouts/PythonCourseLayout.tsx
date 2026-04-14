@@ -13,9 +13,9 @@ const PythonCourseLayout: React.FC = () => {
           <nav className="flex flex-wrap justify-center gap-4">
             <Link to="/" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">返回首页</Link>
             <Link to="/python-course" className="px-4 py-2 bg-pink-300 hover:bg-pink-400 rounded-full text-pink-800 font-medium transition-all">课程首页</Link>
-            <a href="#syntax" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">基础语法</a>
-            <a href="#data-structures" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">数据结构</a>
-            <a href="#functions" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">函数与模块</a>
+            <a href="#core-language" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">语言核心</a>
+            <a href="#data-libraries" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">数据库</a>
+            <a href="#learning-path" className="px-4 py-2 bg-pink-200 hover:bg-pink-300 rounded-full text-pink-800 font-medium transition-all">学习路径</a>
           </nav>
         </div>
       </header>
