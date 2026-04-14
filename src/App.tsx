@@ -9,6 +9,7 @@ import Skills from './components/Skills';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import PythonCoursePage from './pages/PythonCoursePage';
+import PythonCoreUnit from './pages/PythonCoreUnit';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       </Route>
       <Route path="/python-course" element={<PythonCourseLayout />}>
         <Route index element={<PythonCoursePage />} />
+        <Route path="core-unit" element={<PythonCoreUnit />} />
       </Route>
     </Routes>
   );

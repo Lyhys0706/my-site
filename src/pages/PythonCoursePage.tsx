@@ -103,6 +103,13 @@ const PythonCoursePage: React.FC = () => {
                   </div>
                 ))}
               </div>
+              {module.id === 1 && (
+                <div className="mt-8 pt-6 border-t border-pink-100">
+                  <a href="/python-course/core-unit" className="inline-block px-6 py-3 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-medium rounded-full hover:from-pink-400 hover:to-pink-500 transition-all">
+                    开始学习第一个单元 →
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
