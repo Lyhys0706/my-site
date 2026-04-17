@@ -18,6 +18,21 @@ const CodeRunner: React.FC<{
   const editorViewRef = useRef<EditorView | null>(null);
   const pyodideRef = useRef<any>(null);
 
+  // 重置代码到初始状态
+  const resetCode = () => {
+    setCode(initialCode);
+    if (editorViewRef.current) {
+      editorViewRef.current.dispatch({
+        changes: {
+          from: 0,
+          to: editorViewRef.current.state.doc.length,
+          insert: initialCode
+        }
+      });
+    }
+    setOutput('');
+  };
+
   // 初始化Pyodide
   useEffect(() => {
     const loadPyodide = async () => {
@@ -136,14 +151,23 @@ const CodeRunner: React.FC<{
             className="border border-gray-300 rounded-lg h-64 mb-4"
           ></div>
 
-          {/* 运行按钮 */}
-          <button
-            onClick={runCode}
-            disabled={isRunning}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
-          >
-            {isRunning ? '运行中...' : '运行代码'}
-          </button>
+          {/* 按钮区域 */}
+          <div className="flex gap-4 mb-4">
+            <button
+              onClick={runCode}
+              disabled={isRunning}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
+            >
+              {isRunning ? '运行中...' : '运行代码'}
+            </button>
+            <button
+              onClick={resetCode}
+              disabled={isRunning}
+              className="px-4 py-2 rounded-lg font-medium transition-all bg-gray-200 text-gray-700 hover:bg-gray-300"
+            >
+              重置代码
+            </button>
+          </div>
 
           {/* 输出区域 */}
           {output && (
