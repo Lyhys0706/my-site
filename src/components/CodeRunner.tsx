@@ -1,9 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { EditorState } from '@codemirror/state';
-import { EditorView, keymap, lineNumbers, highlightActiveLineGutter, highlightActiveLine, drawSelection } from '@codemirror/view';
-import { python } from '@codemirror/lang-python';
-import { defaultKeymap } from '@codemirror/commands';
-import { oneDark } from '@codemirror/theme-one-dark';
 
 const CodeRunner: React.FC<{
   initialCode: string;
@@ -14,30 +9,16 @@ const CodeRunner: React.FC<{
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const editorRef = useRef<HTMLDivElement>(null);
-  const editorViewRef = useRef<EditorView | null>(null);
   const pyodideRef = useRef<any>(null);
 
-  // 重置代码到初始状态
   const resetCode = () => {
     setCode(initialCode);
-    if (editorViewRef.current) {
-      editorViewRef.current.dispatch({
-        changes: {
-          from: 0,
-          to: editorViewRef.current.state.doc.length,
-          insert: initialCode
-        }
-      });
-    }
     setOutput('');
   };
 
-  // 初始化Pyodide
   useEffect(() => {
     const loadPyodide = async () => {
       try {
-        // 动态加载Pyodide
         const { loadPyodide } = await import('pyodide');
         pyodideRef.current = await loadPyodide({
           indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.0/full/',
@@ -51,39 +32,6 @@ const CodeRunner: React.FC<{
     loadPyodide();
   }, []);
 
-  // 初始化CodeMirror
-  useEffect(() => {
-    if (!editorRef.current) return;
-
-    const startState = EditorState.create({
-      doc: code,
-      extensions: [
-        lineNumbers(),
-        highlightActiveLineGutter(),
-        highlightActiveLine(),
-        drawSelection(),
-        keymap.of(defaultKeymap),
-        python(),
-        oneDark,
-        EditorView.updateListener.of(update => {
-          if (update.changes) {
-            setCode(update.state.doc.toString());
-          }
-        }),
-      ],
-    });
-
-    editorViewRef.current = new EditorView({
-      state: startState,
-      parent: editorRef.current,
-    });
-
-    return () => {
-      editorViewRef.current?.destroy();
-    };
-  }, []);
-
-  // 运行代码
   const runCode = async () => {
     if (!pyodideRef.current) {
       setOutput('Python环境正在加载，请稍候...');
@@ -94,7 +42,6 @@ const CodeRunner: React.FC<{
     setOutput('');
 
     try {
-      // 重定向stdout和stderr
       const originalStdout = pyodideRef.current.globals.get('sys').stdout;
       const originalStderr = pyodideRef.current.globals.get('sys').stderr;
 
@@ -114,10 +61,8 @@ const CodeRunner: React.FC<{
         flush: () => {}
       });
 
-      // 运行代码
       await pyodideRef.current.runPython(code);
 
-      // 恢复原始输出
       pyodideRef.current.globals.get('sys').stdout = originalStdout;
       pyodideRef.current.globals.get('sys').stderr = originalStderr;
 
@@ -131,7 +76,6 @@ const CodeRunner: React.FC<{
 
   return (
     <div className="bg-white border border-pink-200 rounded-xl shadow-sm mb-6">
-      {/* 标题栏 */}
       <div 
         className="flex justify-between items-center px-6 py-3 bg-pink-100 rounded-t-xl cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
@@ -142,17 +86,16 @@ const CodeRunner: React.FC<{
         </button>
       </div>
 
-      {/* 内容区域 */}
       {isOpen && (
         <div className="p-4">
-          {/* 代码编辑器 */}
-          <div 
-            ref={editorRef} 
-            className="border border-gray-300 rounded-lg h-64 mb-4"
-          ></div>
+          <textarea
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            className="w-full h-64 p-4 border border-gray-300 rounded-lg font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+            placeholder="在这里输入Python代码..."
+          />
 
-          {/* 按钮区域 */}
-          <div className="flex gap-4 mb-4">
+          <div className="flex gap-4 mt-4">
             <button
               onClick={runCode}
               disabled={isRunning}
@@ -169,7 +112,6 @@ const CodeRunner: React.FC<{
             </button>
           </div>
 
-          {/* 输出区域 */}
           {output && (
             <div className="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
               <h4 className="font-medium text-gray-700 mb-2">输出:</h4>
