@@ -9,6 +9,8 @@ const CodeRunner: React.FC<{
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingMessage, setLoadingMessage] = useState('正在加载Python环境，请稍候...');
   const pyodideRef = useRef<any>(null);
 
   const resetCode = () => {
@@ -19,13 +21,24 @@ const CodeRunner: React.FC<{
   useEffect(() => {
     const loadPyodide = async () => {
       try {
-        const { loadPyodide } = await import('pyodide');
-        pyodideRef.current = await loadPyodide({
-          indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.0/full/',
+        setIsLoading(true);
+        setLoadingMessage('正在加载Python环境，请稍候...');
+        
+        const pyodideModule = await import('pyodide');
+        pyodideRef.current = await pyodideModule.loadPyodide({
+          indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.29.3/full/',
         });
+        
+        setLoadingMessage('Python环境已就绪');
+        
+        setTimeout(() => {
+          setLoadingMessage('');
+          setIsLoading(false);
+        }, 2000);
       } catch (error) {
         console.error('Failed to load Pyodide:', error);
         setOutput('加载Python环境失败，请刷新页面重试');
+        setIsLoading(false);
       }
     };
 
@@ -39,34 +52,27 @@ const CodeRunner: React.FC<{
     }
 
     setIsRunning(true);
-    setOutput('');
+    setOutput('运行中...');
 
     try {
-      const originalStdout = pyodideRef.current.globals.get('sys').stdout;
-      const originalStderr = pyodideRef.current.globals.get('sys').stderr;
+      let outputBuffer = [];
 
-      let outputBuffer = '';
-
-      pyodideRef.current.globals.set('sys.stdout', {
-        write: (text: string) => {
-          outputBuffer += text;
-        },
-        flush: () => {}
+      pyodideRef.current.setStdout({
+        batched: (text: string) => {
+          outputBuffer.push(text);
+        }
       });
 
-      pyodideRef.current.globals.set('sys.stderr', {
-        write: (text: string) => {
-          outputBuffer += text;
-        },
-        flush: () => {}
+      pyodideRef.current.setStderr({
+        batched: (text: string) => {
+          outputBuffer.push(text);
+        }
       });
 
-      await pyodideRef.current.runPython(code);
+      await pyodideRef.current.runPythonAsync(code);
 
-      pyodideRef.current.globals.get('sys').stdout = originalStdout;
-      pyodideRef.current.globals.get('sys').stderr = originalStderr;
-
-      setOutput(outputBuffer || '代码运行成功，无输出');
+      const finalOutput = outputBuffer.join('');
+      setOutput(finalOutput || '代码运行成功，无输出');
     } catch (error: any) {
       setOutput(`错误: ${error.message}`);
     } finally {
@@ -88,24 +94,31 @@ const CodeRunner: React.FC<{
 
       {isOpen && (
         <div className="p-4">
+          {(isLoading || loadingMessage) && (
+            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-sm">
+              {loadingMessage}
+            </div>
+          )}
+          
           <textarea
             value={code}
             onChange={(e) => setCode(e.target.value)}
             className="w-full h-64 p-4 border border-gray-300 rounded-lg font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
             placeholder="在这里输入Python代码..."
+            disabled={isLoading}
           />
 
           <div className="flex gap-4 mt-4">
             <button
               onClick={runCode}
-              disabled={isRunning}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
+              disabled={isRunning || isLoading}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${isRunning || isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
             >
               {isRunning ? '运行中...' : '运行代码'}
             </button>
             <button
               onClick={resetCode}
-              disabled={isRunning}
+              disabled={isRunning || isLoading}
               className="px-4 py-2 rounded-lg font-medium transition-all bg-gray-200 text-gray-700 hover:bg-gray-300"
             >
               重置代码
